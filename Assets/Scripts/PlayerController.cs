@@ -4,71 +4,120 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //Movimiento
+    public static PlayerController instance;
+
+
+    //Variables de Movimiento
     public float moveSpeed;
 
-    //Componentes de Unity
+    //Variables de Componentes de Unity
     public Rigidbody2D rbPlayer;
 
-    //Salto
+    //Variables de Salto
     public float jumpForce;
     private bool canDoubleJump;
 
-    //Deteccion de suelo
+    //Variables de Deteccion de suelo
     public Transform groundCheck;
     public LayerMask whatIsGround;
     private bool isGrounded;
 
-    //Animaciones del jugador
-    private Animator aniPlayer;
-    private SpriteRenderer theSR;
+    //Variables de Animaciones del jugador
+    public Animator aniPlayer;
+    public SpriteRenderer theSR;
+
+    //Variables de la mecánica de KnockBack
+    public float knockBackLength, knockBackForce;
+    private float knockBackCounter;
+
+
+    private void Awake()
+    {
+            instance = this;
+    }
 
     void Start()
     {
+        //Al empezar, buscará los componentes del animator de las dos variables.
         aniPlayer = GetComponent<Animator>();
         theSR = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        rbPlayer.velocity = new Vector2(moveSpeed * Input.GetAxis("Horizontal"), rbPlayer.velocity.y);
-
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
-
-        if (isGrounded)
+        //Solo podremos mover al personaje cuando el knockback haya llegado a 0 y haya terminado, para así no poder movernos mientras este se realiza.
+        if(knockBackCounter <= 0)
         {
-            canDoubleJump = true;
-        }
+            //Cuando se pulsen las teclas de "Horizontal"(Que estén especificadas en el Input Manager), el player, se moverá horizontalmente, ya que actua sobre es el ejeX 
+            rbPlayer.velocity = new Vector2(moveSpeed * Input.GetAxis("Horizontal"), rbPlayer.velocity.y);
 
-        if (Input.GetButtonDown("Jump"))
-        {
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround); //Crea un circulo debajo del objeto para detectar el suelo
+
+            //Si está activo "isGrounded" y por lo tanto el player está en el suelo, se podrá realizar un doble salto es decir saltar después del primer salto
             if (isGrounded)
             {
-                rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, jumpForce);
+                canDoubleJump = true;
+            }
+
+            //Si la tecla "Jump" del Input Manager se pulsa, ocurre:
+            if (Input.GetButtonDown("Jump"))
+            {
+                //Si se detecta que el jugador está en el suelo
+                if (isGrounded)
+                {
+                    //Igual que anteriormente modificaba el ejeX, ahora modifica el ejeY(Vertical) y aplica la variable JumpForce para ajustar cuanto se mueve el player hacia arriba
+                    rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, jumpForce);
+                }
+                else
+                {
+                    //Además si el canDoubleJump es true, quiere decir que está en el suelo:
+                    if (canDoubleJump)
+                    {
+                        //Dejará hacer un segundo salto de la misma forma que el anterior
+                        rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, jumpForce);
+                        canDoubleJump = false; //Después de eso, la variable se pondrá en false, hasta que se vuelva a tocar el suelo.
+                    }
+                }
+
+
+            }
+
+            //Con esto, el player puede moverse hacía el lado contrario al que mira el sprite y este se girará usando el flip sobre el sprite renderer del jugador
+            if (rbPlayer.velocity.x < 0)
+            {
+                theSR.flipX = true;
+            }
+            else if (rbPlayer.velocity.x > 0)
+            {
+                theSR.flipX = false;
+            }
+        }
+        else
+        {
+            knockBackCounter -= Time.deltaTime; //Esta linea se encarga de bajar el contador del knockback a 0 usando el deltaTime
+
+            //Verifica en que posición está el sprite renderer y hace que el movimiento del knockbac sea acorde a es aposición
+            if (!theSR.flipX)
+            {
+                //Si el player está mirando hacia la derecha aplica la fuerza en negativo
+                rbPlayer.velocity = new Vector2(-knockBackForce, rbPlayer.velocity.y);
             }
             else
             {
-                if (canDoubleJump)
-                {
-                    rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, jumpForce);
-                    canDoubleJump = false;
-                }
+                //Si es el caso opuesto, aplica la fuerza en negativo
+                rbPlayer.velocity = new Vector2(knockBackForce, rbPlayer.velocity.y);
             }
-
-            
         }
-
-        if (rbPlayer.velocity.x < 0)
-        {
-            theSR.flipX = true;
-        }
-        else if (rbPlayer.velocity.x > 0)
-        {
-            theSR.flipX = false;
-        }
-
-
+       
+        //Hace referencia a las variables que se han creado en el animator, para dar paso a la animación de caminar si se mueve la variable "moveSpeed"
         aniPlayer.SetFloat("moveSpeed", Mathf.Abs(rbPlayer.velocity.x));
+        //O dar paso a la animación de salto si cambia a true o false la variable "isGrounded"
         aniPlayer.SetBool("isGrounded", isGrounded);
+    }
+
+    public void Knockback()
+    {
+        knockBackCounter = knockBackLength;
+        rbPlayer.velocity = new Vector2(4f, knockBackForce); //El player reacciona moviendo el ejeY(vertical) y el ejeX(Horizontal) se mueve con 4f siempre
     }
 }
