@@ -17,6 +17,8 @@ public class PlayerHealthController : MonoBehaviour
     //Declaramos la variable para el sprite renderer del jugador
     private SpriteRenderer srPlayer;
 
+    public GameObject deathEffect;
+
 
     private void Awake()
     {
@@ -61,7 +63,9 @@ public class PlayerHealthController : MonoBehaviour
             {
                 currentHealth = 0; //Indicamos que si esto ocurre, la vida del jugador se ponga a 0, por si está en un número negativo
 
-                gameObject.SetActive(false); //Esto hace que el jugador desaparezca del mapa
+                Instantiate(deathEffect, PlayerController.instance.transform.position, PlayerController.instance.transform.rotation);
+
+                LevelManager.instance.RespawnPlayer();
             }
             else
             {
@@ -78,5 +82,19 @@ public class PlayerHealthController : MonoBehaviour
             UIController.Instance.UpdateHealthDisplay();
         }
         
+    }
+
+    //La función se encarga de curar al jugador
+    public void HealPlayer()
+    {
+        currentHealth++; //Primero suma 1 vida al jugador
+
+        //Verifica y si el player cuenta con más vidas de las maximas
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth; //Iguala la vida del jugador a la máxima
+        }
+
+        UIController.Instance.UpdateHealthDisplay(); //Por último, actualiza la UI con las vidas que tenga el player en ese momento
     }
 }

@@ -12,7 +12,10 @@ public class UIController : MonoBehaviour
     public Image heart0, heart1, heart2, heart3; 
 
     //Los dos estados de los corazones y los dos estados del cartel (que hace que el cartel tenga el estado de vacio y rojo)
-    public Sprite heartFull, heartEmpty, heartFullFinal, heartEmptyFinal; 
+    public Sprite heartFull, heartEmpty, heartFullFinal, heartEmptyFinal, healthBar;
+
+    //Declaramos los 2 textos tanto de monedas como de gemas para mas adelante modificarlos en tiempo de ejecución
+    public Text coinText, gemsText;
 
     private void Awake()
     {
@@ -21,7 +24,9 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        
+        //Cada vez que comienza:
+        UpdateCoinCount(); //Actualiza a 0 el contador de monedas
+        UpdateGemsCount(); //Actualiza a 0 el contador de Gemas
     }
 
     void Update()
@@ -92,5 +97,16 @@ public class UIController : MonoBehaviour
 
                 break;
         }
+    }
+
+    //La función que se encarga de actualizar el texto usando variables instanciadas de "LevelManager":
+    public void UpdateCoinCount()
+    {
+        coinText.text = LevelManager.instance.coinsCollected.ToString(); //Actualiza el texto en el que pone el número de Monedas
+    }
+
+    public void UpdateGemsCount()
+    {
+        gemsText.text = LevelManager.instance.gemsCollected.ToString(); //Actualiza el texto en el que pone el número de Gemas
     }
 }
