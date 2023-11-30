@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager instance; //Se declara como una estancia
 
+
     //Declaramos el tiempo que esperará para el Respawn
     public float waitToRespawn;
 
@@ -20,7 +21,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     //De momento no se usan estas dos funciones start y update
@@ -45,7 +46,13 @@ public class LevelManager : MonoBehaviour
         PlayerController.instance.gameObject.SetActive(false);
 
         //Despues, se espera durante los segundos que se pongan en la variable "WaitToRespawn"
-        yield return new WaitForSeconds(waitToRespawn);
+        yield return new WaitForSeconds(waitToRespawn + (1f / UIController.Instance.fadeSpeed));
+
+        UIController.Instance.FadeToBlack();
+
+        yield return new WaitForSeconds((1f / UIController.Instance.fadeSpeed) + .2f);
+
+        UIController.Instance.FadeFromBlack();
 
         //Cuando se espera ese tiempo el player se pone de nuevo en true en el "SetActive" y se hace visible
         PlayerController.instance.gameObject.SetActive(true);
@@ -64,5 +71,23 @@ public class LevelManager : MonoBehaviour
         UIController.Instance.heart3.sprite = UIController.Instance.heartFull; //Añade de nuevo el sprite de Heart3
         //Y el vanvas y por ende el interfaz grafica, ya está lista para comenzar el nivel de nuevo
 
+    }
+
+    public void EndLevel()
+    {
+        StartCoroutine(EndLevelCo());
+    }
+
+    public IEnumerator EndLevelCo()
+    {
+        PlayerController.instance.stopInput = true;
+
+        CameraController.instance.stopFollow = true;
+
+        UIController.Instance.levelCompleteImage.SetActive(true);
+
+        yield return new WaitForSeconds(.1f);
+
+        UIController.Instance.FadeToBlack();
     }
 }

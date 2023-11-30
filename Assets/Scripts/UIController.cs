@@ -17,6 +17,12 @@ public class UIController : MonoBehaviour
     //Declaramos los 2 textos tanto de monedas como de gemas para mas adelante modificarlos en tiempo de ejecución
     public Text coinText, gemsText;
 
+    public Image fadeScreen;
+    public float fadeSpeed;
+    private bool shouldFadeToBlack, shouldFadeFromBlack;
+
+    public GameObject levelCompleteImage;
+
     private void Awake()
     {
         Instance = this;
@@ -27,11 +33,29 @@ public class UIController : MonoBehaviour
         //Cada vez que comienza:
         UpdateCoinCount(); //Actualiza a 0 el contador de monedas
         UpdateGemsCount(); //Actualiza a 0 el contador de Gemas
+
+        FadeFromBlack();
     }
 
     void Update()
     {
-        
+        if (shouldFadeToBlack)
+        {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+            if(fadeScreen.color.a == 1f)
+            {
+                shouldFadeToBlack = false;
+            }
+        }
+
+        if (shouldFadeFromBlack)
+        {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
+            if (fadeScreen.color.a == 0f)
+            {
+                shouldFadeFromBlack = false;
+            }
+        }
     }
 
     //Se crea la función que se encarga de actualizar los corazones de la pantalla con un switch
@@ -108,5 +132,17 @@ public class UIController : MonoBehaviour
     public void UpdateGemsCount()
     {
         gemsText.text = LevelManager.instance.gemsCollected.ToString(); //Actualiza el texto en el que pone el número de Gemas
+    }
+
+    public void FadeToBlack()
+    {
+        shouldFadeToBlack = true;
+        shouldFadeFromBlack = false;
+    }
+
+    public void FadeFromBlack()
+    {
+        shouldFadeFromBlack = true;
+        shouldFadeToBlack = false;
     }
 }
