@@ -5,21 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class WorldSelect : MonoBehaviour
 {
-    public string BoatLevel;
-    public string MainMenu;
 
-    public void boatLevel()
+    public void CambiarEscena(string nombre)
     {
-        SceneManager.LoadScene(BoatLevel);
-    }
-
-    public void mainMenu()
-    {
-        SceneManager.LoadScene(MainMenu);
-    }
-
-    public void IslandLevel()
-    {
-        
+        SceneManager.LoadScene(nombre);
     }
 }

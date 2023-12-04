@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
         //Al empezar, buscará los componentes del animator de las dos variables.
         aniPlayer = GetComponent<Animator>();
         theSR = GetComponent<SpriteRenderer>();
+
+        //Quitar la linea de debajo de comentarios para borrar los datos del playerPrefs de los niveles, lueg ponerla de nuevo en comentarios
+        //PlayerPrefs.DeleteKey("NivelesDesbloqueados");
     }
 
     void Update()

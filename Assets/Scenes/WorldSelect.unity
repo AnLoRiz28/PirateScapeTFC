@@ -1001,14 +1001,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1754668217}
         m_TargetAssemblyTypeName: WorldSelect, Assembly-CSharp
-        m_MethodName: mainMenu
-        m_Mode: 1
+        m_MethodName: CambiarEscena
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1523430961
@@ -1136,14 +1136,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1754668217}
         m_TargetAssemblyTypeName: WorldSelect, Assembly-CSharp
-        m_MethodName: boatLevel
-        m_Mode: 1
+        m_MethodName: CambiarEscena
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: BarcoLevelSelect
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1609891564
@@ -1321,8 +1321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3696329b359ca8e499dbeac046dde707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoatLevel: BarcoLevelSelect
-  MainMenu: MainMenu
 --- !u!1 &2002984136
 GameObject:
   m_ObjectHideFlags: 0

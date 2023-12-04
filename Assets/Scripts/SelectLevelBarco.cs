@@ -2,20 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SelectLevelBarco : MonoBehaviour
 {
-    public string Level1;
-    public string WorldSelect;
+    public static SelectLevelBarco Instance;
 
-    public void level1()
+
+    private void Awake()
     {
-        SceneManager.LoadScene(Level1);
+        Instance = this;
     }
 
-    public void worldSelect()
+    private void Start()
     {
-        SceneManager.LoadScene(WorldSelect);
+
     }
+
+    public void CambiarEscena(string nombre)
+    {
+        SceneManager.LoadScene(nombre);
+    }
+
+
 
 }

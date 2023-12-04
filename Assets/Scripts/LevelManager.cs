@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     public float waitToRespawn;
 
     //Declaramos dos variables INT que se encargan de llevar el conteo de las monedas y gemas respectivamente
-    public int coinsCollected, gemsCollected;
+    public int coinsCollected , gemsCollected;
 
     private void Awake()
     {

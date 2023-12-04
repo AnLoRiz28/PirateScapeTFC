@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class pickup : MonoBehaviour
 {
+    public static pickup instance;
 
     //Se declaran las variables booleanas para especificar que tipo de coleccionable es
     public bool isCoin, isHeal, isGem;
@@ -15,8 +16,12 @@ public class pickup : MonoBehaviour
     public GameObject pickUpEffect;
 
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
- 
+
     //Fución que detecta cuando algo colisiona con el colider
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -31,6 +36,7 @@ public class pickup : MonoBehaviour
                 Instantiate(pickUpEffect, transform.position, transform.rotation); //Además en este caso, muestra la animación al desaparecer la moneda
 
                 isCollected = true; //Pone este objeto como ya coleccionado o recogido
+
                 Destroy(gameObject); //Por último, destruye este objeto para que no se pueda volver a recoger de nuevo.
             }
 

@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
     public Sprite heartFull, heartEmpty, heartFullFinal, heartEmptyFinal, healthBar;
 
     //Declaramos los 2 textos tanto de monedas como de gemas para mas adelante modificarlos en tiempo de ejecución
-    public Text coinText, gemsText;
+    public Text coinText , gemsText;
 
     public Image fadeScreen;
     public float fadeSpeed;
