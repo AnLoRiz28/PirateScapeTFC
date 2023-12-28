@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     private bool canDoubleJump;
 
+    public float bounceForce;
+
     //Variables de Deteccion de suelo
     public Transform groundCheck;
     public LayerMask whatIsGround;
@@ -32,10 +34,23 @@ public class PlayerController : MonoBehaviour
 
     public bool stopInput;
 
+    private EntradasMovimiento entradasMovimiento;
+
 
     private void Awake()
     {
             instance = this;
+            entradasMovimiento = new EntradasMovimiento();
+    }
+
+    private void OnEnable()
+    {
+        entradasMovimiento.Enable();
+    }
+
+    private void OnDisable()
+    {
+        entradasMovimiento.Disable();
     }
 
     void Start()
@@ -45,7 +60,7 @@ public class PlayerController : MonoBehaviour
         theSR = GetComponent<SpriteRenderer>();
 
         //Quitar la linea de debajo de comentarios para borrar los datos del playerPrefs de los niveles, lueg ponerla de nuevo en comentarios
-        //PlayerPrefs.DeleteKey("NivelesDesbloqueados");
+        PlayerPrefs.DeleteKey("NivelesDesbloqueados");
     }
 
     void Update()
@@ -56,7 +71,7 @@ public class PlayerController : MonoBehaviour
             if (knockBackCounter <= 0)
             {
                 //Cuando se pulsen las teclas de "Horizontal"(Que estén especificadas en el Input Manager), el player, se moverá horizontalmente, ya que actua sobre es el ejeX 
-                rbPlayer.velocity = new Vector2(moveSpeed * Input.GetAxis("Horizontal"), rbPlayer.velocity.y);
+                rbPlayer.velocity = new Vector2(moveSpeed * entradasMovimiento.Movimiento.Horizontal.ReadValue<float>(), rbPlayer.velocity.y);
 
                 isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround); //Crea un circulo debajo del objeto para detectar el suelo
 
@@ -64,10 +79,11 @@ public class PlayerController : MonoBehaviour
                 if (isGrounded)
                 {
                     canDoubleJump = true;
+
                 }
 
                 //Si la tecla "Jump" del Input Manager se pulsa, ocurre:
-                if (Input.GetButtonDown("Jump"))
+                if (entradasMovimiento.Movimiento.Salto.ReadValue<float>() >= 1)
                 {
                     //Si se detecta que el jugador está en el suelo
                     if (isGrounded)
@@ -128,5 +144,10 @@ public class PlayerController : MonoBehaviour
     {
         knockBackCounter = knockBackLength;
         rbPlayer.velocity = new Vector2(4f, knockBackForce); //El player reacciona moviendo el ejeY(vertical) y el ejeX(Horizontal) se mueve con 4f siempre
+    }
+
+    public void Bounce()
+    {
+        rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, bounceForce);
     }
 }

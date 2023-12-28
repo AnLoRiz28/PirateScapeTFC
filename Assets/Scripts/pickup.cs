@@ -31,7 +31,11 @@ public class pickup : MonoBehaviour
             {
                 LevelManager.instance.coinsCollected++; //Sumará uno al contador de monedas
 
+
+
                 UIController.Instance.UpdateCoinCount(); //Actualizará en la interfaz el texto del contador de monedas
+
+                
 
                 Instantiate(pickUpEffect, transform.position, transform.rotation); //Además en este caso, muestra la animación al desaparecer la moneda
 
@@ -40,15 +44,6 @@ public class pickup : MonoBehaviour
                 Destroy(gameObject); //Por último, destruye este objeto para que no se pueda volver a recoger de nuevo.
             }
 
-            if (isGem) //Si es una gema
-            {
-                LevelManager.instance.gemsCollected++; //Sumará uno al contador de gemas
-
-                UIController.Instance.UpdateGemsCount(); //Actualizará en la interfaz el texto del contador de gemas
-
-                isCollected = true; //Pone este objeto como ya coleccionado o recogido
-                Destroy(gameObject); //Por último, destruye este objeto para que no se pueda volver a recoger de nuevo.
-            }
 
             if (isHeal) //Si es un corazón
             {

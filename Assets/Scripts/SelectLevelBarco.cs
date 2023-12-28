@@ -16,7 +16,7 @@ public class SelectLevelBarco : MonoBehaviour
 
     private void Start()
     {
-
+        
     }
 
     public void CambiarEscena(string nombre)

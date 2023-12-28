@@ -6,11 +6,16 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    public string WorldMenu;
+    public string IntroAnimacion, creditos;
 
     public void StartGame()
     {
-        SceneManager.LoadScene(WorldMenu);
+        SceneManager.LoadScene(IntroAnimacion);
+    }
+
+    public void Startcreditos()
+    {
+        SceneManager.LoadScene(creditos);
     }
 
     public void QuitGame()

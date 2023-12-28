@@ -84,6 +84,41 @@ public class PlayerHealthController : MonoBehaviour
         
     }
 
+    public void PirataDealDamage()
+    {
+        if (invincibleCounter <= 0) //Sólo deja que el player pierda vida si el conteo ha llegado a 0
+        {
+            currentHealth --; //Cuando se llame a esta función, la vida del jugador disminuirá en uno, ya que estamos restando uno al currentHealth
+            currentHealth--;
+
+            PlayerController.instance.aniPlayer.SetTrigger("Hurt"); //Estamos pasando al animator del player esta variable cada vez que quitamos una vida
+
+            //Si la currentHealth (vida del jugador), llega a un valor de cero o inferior, ocurrirá lo que hay dentro del if
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0; //Indicamos que si esto ocurre, la vida del jugador se ponga a 0, por si está en un número negativo
+
+                Instantiate(deathEffect, PlayerController.instance.transform.position, PlayerController.instance.transform.rotation);
+
+                LevelManager.instance.RespawnPlayer();
+            }
+            else
+            {
+                invincibleCounter = invincibleLenght;
+
+                //Cuando el tiempo de invencibilidad esté activo, el color del jugador cambiará y la variable que se encarga de la opacidad se pondrá en 0.5
+                srPlayer.color = new Color(srPlayer.color.r, srPlayer.color.g, srPlayer.color.b, .5f);
+
+                //Siempre que perdamos una vida, se llama a la función externa que se encarga de realizar el knockback
+                PlayerController.instance.Knockback();
+            }
+
+            //Fuera del if(), por lo que se ejecuta siempre después de perder una vida, llama a una función externa que se encuentra en el fichero "UIController"
+            UIController.Instance.UpdateHealthDisplay();
+        }
+
+    }
+
     //La función se encarga de curar al jugador
     public void HealPlayer()
     {

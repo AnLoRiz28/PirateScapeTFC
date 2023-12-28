@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PauseMenu : MonoBehaviour
     public string levelSelect, mainMenu;
     public GameObject pauseScreen;
     public bool isPaused;
+
+    public Text coinTextPause;
 
     private void Awake()
     {
@@ -34,9 +37,11 @@ public class PauseMenu : MonoBehaviour
     {
         if (isPaused)
         {
+            
             isPaused = false;
             pauseScreen.SetActive(false);
             Time.timeScale = 1f;
+            
         }
         else
         {
@@ -58,7 +63,7 @@ public class PauseMenu : MonoBehaviour
         {
             LevelController.instance.SubirNiveles();
         }
-        
+
         SceneManager.LoadScene(levelSelect);
         Time.timeScale = 1f;
     }

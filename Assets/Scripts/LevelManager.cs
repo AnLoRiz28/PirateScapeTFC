@@ -74,7 +74,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void EndLevel()
-    {
+    { 
         StartCoroutine(EndLevelCo());
     }
 
@@ -85,6 +85,8 @@ public class LevelManager : MonoBehaviour
         CameraController.instance.stopFollow = true;
 
         UIController.Instance.levelCompleteImage.SetActive(true);
+
+        UIController.Instance.UpdateCoinCountPause();
 
         yield return new WaitForSeconds(.1f);
 

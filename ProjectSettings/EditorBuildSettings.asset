@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d0f82f68b8f475642a83bf3e06a69dc3
   - enabled: 1
-    path: Assets/Scenes/WorldSelect.unity
-    guid: 349364977fe913944b8c67486ca5bb9d
+    path: Assets/Scenes/Introduccion.unity
+    guid: e5e6d07d2776711489d1337db2bd6669
+  - enabled: 1
+    path: Assets/Scenes/Creditos.unity
+    guid: 32b3895cbaf0f4a4f9fee1e99cf82114
   - enabled: 1
     path: Assets/Scenes/BarcoLevelSelect.unity
     guid: c8ca483997d1f1044b3f0ed79f206ea9
@@ -23,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Niveles/Level3.unity
     guid: 4cd88726b0b8dde4e8e0694c8f8e2560
+  - enabled: 1
+    path: Assets/Scenes/Niveles/Level4.unity
+    guid: ee1f35ec941b95f42ab9dc35c94b8e09
+  - enabled: 1
+    path: Assets/Scenes/Niveles/Level5.unity
+    guid: 69657f3d8997fc24ca5bf8a0429d7613
   m_configObjects: {}

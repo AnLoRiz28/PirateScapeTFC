@@ -32,8 +32,6 @@ public class UIController : MonoBehaviour
     {
         //Cada vez que comienza:
         UpdateCoinCount(); //Actualiza a 0 el contador de monedas
-        UpdateGemsCount(); //Actualiza a 0 el contador de Gemas
-
         FadeFromBlack();
     }
 
@@ -129,10 +127,11 @@ public class UIController : MonoBehaviour
         coinText.text = LevelManager.instance.coinsCollected.ToString(); //Actualiza el texto en el que pone el número de Monedas
     }
 
-    public void UpdateGemsCount()
+    public void UpdateCoinCountPause()
     {
-        gemsText.text = LevelManager.instance.gemsCollected.ToString(); //Actualiza el texto en el que pone el número de Gemas
+        PauseMenu.instance.coinTextPause.text = " : " + LevelManager.instance.coinsCollected.ToString() + " / 6"; //Actualiza el texto en el que pone el número de Monedas
     }
+
 
     public void FadeToBlack()
     {
