@@ -48,11 +48,12 @@ public class LevelManager : MonoBehaviour
         //Despues, se espera durante los segundos que se pongan en la variable "WaitToRespawn"
         yield return new WaitForSeconds(waitToRespawn + (1f / UIController.Instance.fadeSpeed));
 
-        UIController.Instance.FadeToBlack();
+        UIController.Instance.FadeToBlack(); //La pantalla se pone en negro con un funcido
+
 
         yield return new WaitForSeconds((1f / UIController.Instance.fadeSpeed) + .2f);
 
-        UIController.Instance.FadeFromBlack();
+        UIController.Instance.FadeFromBlack(); //Se vuelve a color normal de la pantalla
 
         //Cuando se espera ese tiempo el player se pone de nuevo en true en el "SetActive" y se hace visible
         PlayerController.instance.gameObject.SetActive(true);
@@ -73,23 +74,25 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    //Función que se encarga de llamar a la corrutina creada más abajo
     public void EndLevel()
     { 
         StartCoroutine(EndLevelCo());
     }
 
+    //Corrutina que se encarga de la parte de cuando termina el nivel
     public IEnumerator EndLevelCo()
     {
-        PlayerController.instance.stopInput = true;
+        PlayerController.instance.stopInput = true; //El jugador deja de recibir inputs
 
-        CameraController.instance.stopFollow = true;
+        CameraController.instance.stopFollow = true; //La camara deja de seguir al player
 
-        UIController.Instance.levelCompleteImage.SetActive(true);
+        UIController.Instance.levelCompleteImage.SetActive(true); //Se activa el levelComplete de UIController
 
         UIController.Instance.UpdateCoinCountPause();
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.1f); //Espera durante 1f
 
-        UIController.Instance.FadeToBlack();
+        UIController.Instance.FadeToBlack(); //La pantalla se vuelve negra
     }
 }

@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
         aniPlayer = GetComponent<Animator>();
         theSR = GetComponent<SpriteRenderer>();
 
-        //Quitar la linea de debajo de comentarios para borrar los datos del playerPrefs de los niveles, lueg ponerla de nuevo en comentarios
-        PlayerPrefs.DeleteKey("NivelesDesbloqueados");
+        //Quitar la linea de debajo de comentarios para borrar los datos del playerPrefs de los niveles, luego ponerla de nuevo en comentarios
+        //PlayerPrefs.DeleteKey("NivelesDesbloqueados");
     }
 
     void Update()
@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
                     {
                         //Igual que anteriormente modificaba el ejeX, ahora modifica el ejeY(Vertical) y aplica la variable JumpForce para ajustar cuanto se mueve el player hacia arriba
                         rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, jumpForce);
+                        AudioManager.instance.PlaySoundFX(14);
                     }
                     else
                     {
@@ -98,6 +99,8 @@ public class PlayerController : MonoBehaviour
                         {
                             //Dejará hacer un segundo salto de la misma forma que el anterior
                             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, jumpForce);
+                            AudioManager.instance.PlaySoundFX(14);
+
                             canDoubleJump = false; //Después de eso, la variable se pondrá en false, hasta que se vuelva a tocar el suelo.
                         }
                     }
@@ -142,10 +145,11 @@ public class PlayerController : MonoBehaviour
 
     public void Knockback()
     {
-        knockBackCounter = knockBackLength;
+        knockBackCounter = knockBackLength; //Le da el valor al counter que tiene el Lenght
         rbPlayer.velocity = new Vector2(4f, knockBackForce); //El player reacciona moviendo el ejeY(vertical) y el ejeX(Horizontal) se mueve con 4f siempre
     }
 
+    //Esta función hace que el jugador mueve su eje y con la fuerza que se indique en bounceForce, se llama a esta función al matar a un enemigo en "hurtBox"
     public void Bounce()
     {
         rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, bounceForce);

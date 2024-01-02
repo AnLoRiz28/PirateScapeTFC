@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PirataDamage : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    //No se usan las funciones Start y Update, y que solo se usa la función de la clase creada más abajo
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -21,9 +21,8 @@ public class PirataDamage : MonoBehaviour
     {
         if (other.tag == "Player") //Especificamos que solo reaccione cuando lo que choque contra el objeto tenga la etiqueta de "Player" y por lo tanto sea el jugador
         {
-            PlayerHealthController.instance.PirataDealDamage();
+            PlayerHealthController.instance.PirataDealDamage();//Y llama a la función de la clase PlayerHealthController, que quita vida al player
             
-
         }
     }
 }

@@ -30,22 +30,22 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        //Cada vez que comienza:
-        UpdateCoinCount(); //Actualiza a 0 el contador de monedas
-        FadeFromBlack();
+        StartCoroutine(CoFromFadeScreen());
     }
 
     void Update()
     {
         if (shouldFadeToBlack)
         {
+            //Cambia la opacidad del fadeScreen y lo pone en 1f
             fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
-            if(fadeScreen.color.a == 1f)
+            if(fadeScreen.color.a == 1f) //Si está en 1f:
             {
-                shouldFadeToBlack = false;
+                shouldFadeToBlack = false; //Lo pone en falso para no hacerlo de nuevo
             }
         }
 
+        //Hace lo contrario al anterior, pero poniendo la opacidad en 0 (Transparente)
         if (shouldFadeFromBlack)
         {
             fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
@@ -69,6 +69,7 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartFull;
                 heart2.sprite = heartFull;
                 heart3.sprite = heartFull;
+                AudioManager.instance.StopSoundFX(13);
 
                 break;
 
@@ -78,6 +79,7 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartFull;
                 heart2.sprite = heartFull;
                 heart3.sprite = heartEmpty;
+                AudioManager.instance.StopSoundFX(13);
 
                 break;
 
@@ -87,6 +89,7 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartFull;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                AudioManager.instance.StopSoundFX(13);
 
                 break;
 
@@ -97,6 +100,7 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartEmpty;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                AudioManager.instance.PlaySoundFX(13);
 
                 break;
 
@@ -106,6 +110,7 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartEmpty;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                AudioManager.instance.StopSoundFX(13);
 
                 break;
 
@@ -116,6 +121,7 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartEmpty;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                AudioManager.instance.StopSoundFX(13);
 
                 break;
         }
@@ -124,7 +130,7 @@ public class UIController : MonoBehaviour
     //La función que se encarga de actualizar el texto usando variables instanciadas de "LevelManager":
     public void UpdateCoinCount()
     {
-        coinText.text = LevelManager.instance.coinsCollected.ToString(); //Actualiza el texto en el que pone el número de Monedas
+        coinText.text = "x" + LevelManager.instance.coinsCollected.ToString(); //Actualiza el texto en el que pone el número de Monedas
     }
 
     public void UpdateCoinCountPause()
@@ -133,6 +139,8 @@ public class UIController : MonoBehaviour
     }
 
 
+
+    //Se crean las dos funciones que se encargan de poner la pantalla en negro con un fundido y de quitar ese fundido negro
     public void FadeToBlack()
     {
         shouldFadeToBlack = true;
@@ -143,5 +151,12 @@ public class UIController : MonoBehaviour
     {
         shouldFadeFromBlack = true;
         shouldFadeToBlack = false;
+    }
+
+    public IEnumerator CoFromFadeScreen()
+    {
+        yield return new WaitForSeconds(0.5f); //Espera durante 1f  
+        UpdateCoinCount(); //Actualiza a 0 el contador de monedas
+        FadeFromBlack();
     }
 }

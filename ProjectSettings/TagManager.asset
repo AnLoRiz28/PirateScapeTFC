@@ -51,3 +51,6 @@ TagManager:
   - name: Player
     uniqueID: 3470918471
     locked: 0
+  - name: TextoImportante
+    uniqueID: 26743079
+    locked: 0

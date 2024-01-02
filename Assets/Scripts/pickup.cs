@@ -39,6 +39,8 @@ public class pickup : MonoBehaviour
 
                 Instantiate(pickUpEffect, transform.position, transform.rotation); //Además en este caso, muestra la animación al desaparecer la moneda
 
+                AudioManager.instance.PlaySoundFX(6);
+
                 isCollected = true; //Pone este objeto como ya coleccionado o recogido
 
                 Destroy(gameObject); //Por último, destruye este objeto para que no se pueda volver a recoger de nuevo.
@@ -53,7 +55,9 @@ public class pickup : MonoBehaviour
                     //Llamará a la función externa que se encarga de curar al player sumando 1 al contador de vidas y actualizando la UI
                     PlayerHealthController.instance.HealPlayer();
 
-                   
+                    AudioManager.instance.PlaySoundFX(7);
+
+
                     isCollected = true; //Pone este objeto como ya coleccionado o recogido
                     Destroy(gameObject); //Por último, destruye este objeto para que no se pueda volver a recoger de nuevo.
                 }

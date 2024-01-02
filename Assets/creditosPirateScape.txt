@@ -1,0 +1,66 @@
+====================================================
+====================================================
+============ CRÉDITOS DE RECURSOS ==================
+====================================================
+====================================================
+
+TODO el Diseño y Programación del videojuego:
+(Antonio López Rodríguez)
+
+====================================================
+============= RECURSOS PÚBLICOS ===================
+====================================================
+
+-PirateBomb
+(Pixel Frog - Itch.io)
+
+-SunnyLand
+(ansimuz - Itch.io)
+
+-PIXEL GUI WOOD
+(MARWAMJ - Itch.io)
+
+-Basic gui bundle
+(Penzilla - Itch.io)
+
+Free Jungle Cartoon GUI
+(Itch.io)
+
+-SPRITES SUELTOS
+(editados por ANTONIO LOPEZ)
+
+-Marcos dialogos
+(Antonio lopez)
+
+-Musica y efectos de sonido
+(UNITY ASSET STORE)
+&&
+(ANTONIO LÓPEZ)
+
+====================================================
+============ RECURSOS ANIMACIONES ==================
+====================================================
+
+Imágenes para animación introducción:
+(Tomadas del opening nº1 de OnePiece)
+&&
+(Generadas con la IA de Microsoft Bing)
+&&
+(Craeadas por Antonio López Rodríguez)
+
+==============================================
+
+Imágenes para la animación del Main Menu:
+(Video de animación de playa descargada:
+
+" Este video, titulado 'La playa - Animación 2D', fue creado por 
+Amanda Carvalho y publicado en febrero/2020 en YouTube. 
+El video original se puede encontrar en 
+https://youtu.be/1VBjUOGiVg0?si=e75JYG-jYeG4iIxl. "
+
+Original text:
+" Este vídeo, intitulado 'The beach - Animation 2D', foi criado por 
+Amanda Carvalho e publicado em fev/2020 no YouTube. 
+O vídeo original pode ser encontrado em 
+https://youtu.be/1VBjUOGiVg0?si=e75JYG-jYeG4iIxl."
+)

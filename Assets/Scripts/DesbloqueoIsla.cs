@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class DesbloqueoIsla : MonoBehaviour
 {
+
+    //=================================================================================
+    //=================================================================================
+    //====================== Esta clase no se usa en el juego =========================
+    //=================================================================================
+    //=================================================================================
+
+
+
     public static DesbloqueoIsla instance;
 
     public bool IslaDesbloqueada;
@@ -23,3 +32,5 @@ public class DesbloqueoIsla : MonoBehaviour
         }
     }
 }
+
+//No borro la clase de momento por si hay algfuna dependecian a esta en alguna otra clase o parametro

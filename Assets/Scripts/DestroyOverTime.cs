@@ -10,7 +10,7 @@ public class DestroyOverTime : MonoBehaviour
 
     void Update()
     {
-        //Cuando se ejecute este script, destruirá el objeto, una vez haya terminado el segundo parametro, que es el tiempo que pongamos en "LifeTime"
+        //Cuando se ejecute este script, destruirá el objeto, una vez haya terminado el segundo parametro "lifeTime", que es el tiempo que pongamos en unity en "LifeTime"
         Destroy(gameObject, lifeTime); 
     }
 }

@@ -34,7 +34,7 @@ public class CheckPointController : MonoBehaviour
     {
         for(int i = 0; i < checkpoints.Length; i++)
         {
-            checkpoints[i].ResetCheckPoint();
+            checkpoints[i].ResetCheckPoint(); //Resetea el checkpoint de la posicion i
         }
     }
 

@@ -24,6 +24,7 @@ public class CheckPoints : MonoBehaviour
     {
         if (other.CompareTag("Player")) //Si lo que colisiona con el checkPoint es el Player:
         {
+            AudioManager.instance.PlaySoundFX(4);
             //Va a llamar a la función de la matriz que desactiva todos los checkpoints
             CheckPointController.instance.DeactiveCheckPoints();
             //Y luego pone activo el ckeckpoint en el que se encuentra

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyControllerMonster : MonoBehaviour
 {
+    //=====================================================================================
+    //ES LA MISMA FUNCIÓN QUE "EnemyController" PERO TIENE LOS FLIPS CAMBIADOS, YA QUE EL SPRITE MIRA HACIA EL LADO CONTARRIO
+    //=====================================================================================
+
     public float moveSpeed;
 
     public Transform leftPoint, rightPoint;

@@ -58,10 +58,14 @@ public class PlayerHealthController : MonoBehaviour
 
             PlayerController.instance.aniPlayer.SetTrigger("Hurt"); //Estamos pasando al animator del player esta variable cada vez que quitamos una vida
 
+            AudioManager.instance.PlaySoundFX(9);
+
             //Si la currentHealth (vida del jugador), llega a un valor de cero o inferior, ocurrirá lo que hay dentro del if
             if (currentHealth <= 0)
             {
                 currentHealth = 0; //Indicamos que si esto ocurre, la vida del jugador se ponga a 0, por si está en un número negativo
+
+                AudioManager.instance.PlaySoundFX(8);
 
                 Instantiate(deathEffect, PlayerController.instance.transform.position, PlayerController.instance.transform.rotation);
 
@@ -92,11 +96,16 @@ public class PlayerHealthController : MonoBehaviour
             currentHealth--;
 
             PlayerController.instance.aniPlayer.SetTrigger("Hurt"); //Estamos pasando al animator del player esta variable cada vez que quitamos una vida
+            AudioManager.instance.PlaySoundFX(9);
+
+
 
             //Si la currentHealth (vida del jugador), llega a un valor de cero o inferior, ocurrirá lo que hay dentro del if
             if (currentHealth <= 0)
             {
                 currentHealth = 0; //Indicamos que si esto ocurre, la vida del jugador se ponga a 0, por si está en un número negativo
+
+                AudioManager.instance.PlaySoundFX(8);
 
                 Instantiate(deathEffect, PlayerController.instance.transform.position, PlayerController.instance.transform.rotation);
 
@@ -108,6 +117,7 @@ public class PlayerHealthController : MonoBehaviour
 
                 //Cuando el tiempo de invencibilidad esté activo, el color del jugador cambiará y la variable que se encarga de la opacidad se pondrá en 0.5
                 srPlayer.color = new Color(srPlayer.color.r, srPlayer.color.g, srPlayer.color.b, .5f);
+
 
                 //Siempre que perdamos una vida, se llama a la función externa que se encarga de realizar el knockback
                 PlayerController.instance.Knockback();

@@ -5,6 +5,12 @@ using UnityEngine;
 public class QuitarCandado : MonoBehaviour
 {
 
+    //=================================================================================
+    //=================================================================================
+    //====================== Esta clase no se usa en el juego =========================
+    //=================================================================================
+    //=================================================================================
+
     public GameObject candado;
     // Start is called before the first frame update
     void Start()
@@ -24,4 +30,6 @@ public class QuitarCandado : MonoBehaviour
 
         }
     }
+
 }
+//No borro la clase de momento por si hay algfuna dependecian a esta en alguna otra clase o parametro
